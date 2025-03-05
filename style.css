@@ -8,80 +8,124 @@ body {
   }
   
   /* Navigation Bar */
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #ff6600;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #ff6600;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav .logo {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+nav .logo-img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+nav .nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+nav .nav-links li {
+  margin: 0 15px;
+}
+
+nav .nav-links a {
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px 10px;
+  overflow: hidden;
+}
+
+nav .nav-links a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #fff;
+  transition: width 0.3s ease;
+}
+
+nav .nav-links a:hover::before {
+  width: 100%;
+}
+
+nav .nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background-color: #fff;
+  transition: width 0.3s ease;
+}
+
+nav .nav-links a:hover::after {
+  width: 100%;
+  transition-delay: 0.3s;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger .line {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 4px 0;
+  transition: all 0.3s ease;
+}
+
+/* Responsive Design for Mobile Devices */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex; /* Show hamburger menu on mobile */
   }
-  
-  nav .logo {
-    display: flex;
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  nav .logo-img {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-  }
-  
-  nav .nav-links {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav .nav-links li {
-    margin: 0 15px;
-  }
-  
-  nav .nav-links a {
-    position: relative;
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    padding: 5px 10px;
-    overflow: hidden;
-  }
-  
-  nav .nav-links a::before {
-    content: '';
+
+  .nav-links {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #fff;
-    transition: width 0.3s ease;
-  }
-  
-  nav .nav-links a:hover::before {
-    width: 100%;
-  }
-  
-  nav .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
+    top: 80px; /* Adjust based on navbar height */
     right: 0;
-    width: 0;
-    height: 2px;
-    background-color: #fff;
-    transition: width 0.3s ease;
-  }
-  
-  nav .nav-links a:hover::after {
+    height: 100vh;
     width: 100%;
-    transition-delay: 0.3s;
+    background-color: #ff6600;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(100%); /* Hide off-screen by default */
+    transition: transform 0.3s ease-in-out;
   }
+
+  .nav-links.active {
+    transform: translateX(0); /* Show menu when active */
+  }
+
+  .nav-links li {
+    margin: 20px 0;
+  }
+}
   
   /* Hero Section */
 .hero {
@@ -95,11 +139,11 @@ body {
 /* Hero Photo */
 .hero-photo {
   position: absolute;
-  top: 30px; /* Position at the top */
+  top: 80px; /* Position at the top */
   left: 50%; /* Center horizontally */
   transform: translateX(-50%); /* Adjust for exact centering */
-  width: 150px; /* Adjust size as needed */
-  height: 150px; /* Adjust size as needed */
+  width: 300px; /* Adjust size as needed */
+  height: 300px; /* Adjust size as needed */
   border-radius: 50%; /* Makes the image round */
   overflow: hidden; /* Ensures the image stays within the circle */
   border: 3px solid #ff6600; /* Orange border */
@@ -118,7 +162,7 @@ body {
   position: relative;
   z-index: 1;
   text-align: center;
-  margin-top: 50px; /* Add space between the image and the content */
+  margin-top: 277px; /* Add space between the image and the content */
 }
 
 .hero-content h1 {
@@ -126,8 +170,135 @@ body {
   margin-bottom: 10px;
 }
 
-.hero-content p {
-  font-size: 24px;
+
+/*Animated card system in hero content */
+.loader {
+  color: rgb(255, 255, 255);
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 100px;
+  padding: 10px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 8px;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.words {
+  overflow: hidden;
+  position: relative;
+}
+.words::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    var(--bg-color) 10%,
+    transparent 30%,
+    transparent 70%,
+    var(--bg-color) 90%
+  );
+  z-index: 20;
+}
+
+.word {
+  height: 100%;
+  color: #ff6600;
+  animation: spin_4991 4s infinite;
+  display: block;
+}
+
+@keyframes spin_4991 {
+  10% {
+    -webkit-transform: translateY(-102%);
+    transform: translateY(-102%);
+  }
+
+  25% {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+
+  35% {
+    -webkit-transform: translateY(-202%);
+    transform: translateY(-202%);
+  }
+
+  50% {
+    -webkit-transform: translateY(-200%);
+    transform: translateY(-200%);
+  }
+
+  60% {
+    -webkit-transform: translateY(-302%);
+    transform: translateY(-302%);
+  }
+
+  75% {
+    -webkit-transform: translateY(-300%);
+    transform: translateY(-300%);
+  }
+
+  85% {
+    -webkit-transform: translateY(-402%);
+    transform: translateY(-402%);
+  }
+
+  100% {
+    -webkit-transform: translateY(-400%);
+    transform: translateY(-400%);
+  }
+}
+
+
+/* Responsive Design for Mobile Devices */
+@media (max-width: 768px) {
+  .hero {
+    padding: 100px 20px 50px; /* Reduce padding for smaller screens */
+  }
+
+  .hero-photo {
+    top: 10px; /* Move image closer to the top */
+    width: 80px; /* Reduce image size */
+    height: 80px;
+  }
+
+  .hero-content {
+    margin-top: 100px; /* Adjust space between image and content */
+  }
+
+  .hero-content h1 {
+    font-size: 36px; /* Reduce font size for smaller screens */
+  }
+
+  .hero-content p {
+    font-size: 18px; /* Reduce font size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-photo {
+    width: 60px; /* Further reduce image size for very small screens */
+    height: 60px;
+  }
+
+  .hero-content {
+    margin-top: 80px; /* Further adjust space between image and content */
+  }
+
+  .hero-content h1 {
+    font-size: 28px; /* Further reduce font size for very small screens */
+  }
+
+  .hero-content p {
+    font-size: 16px; /* Further reduce font size for very small screens */
+  }
 }
 
   
@@ -265,12 +436,10 @@ body {
     font-size: 16px;
   }
 
-  /* Contact Me Section */
   .contact {
-    padding: 50px 20px;
     text-align: center;
   }
-  
+
   .contact h2 {
     font-size: 36px;
     margin-bottom: 20px;
@@ -505,3 +674,166 @@ body {
   }
 }
 
+/* Certificates Button */
+.certificates-button {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.certificates-button .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ff6600;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.certificates-button .btn:hover {
+  background-color: #ff944d;
+  transform: scale(1.05);
+}
+
+/* Certificates Section */
+.certificates {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.certificates h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #ff6600;
+}
+
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.certificate-item {
+  background-color: #333;
+  padding: 20px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.certificate-item:hover {
+  transform: scale(1.05);
+}
+
+.certificate-item img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.certificate-item p {
+  font-size: 16px;
+  color: #fff;
+}
+
+/* Responsive Design for Certificates Section */
+@media (max-width: 768px) {
+  .certificates-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .certificates-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Send Message Form */
+.send-message {
+  margin-top: 30px;
+  text-align: center;
+  max-width: 600px; /* Limit the form width */
+  margin-left: auto; /* Center the form horizontally */
+  margin-right: auto; /* Center the form horizontally */
+  padding: 0 20px; /* Add padding for smaller screens */
+}
+
+.send-message h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #ff6600;
+}
+
+.send-message .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.send-message label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.send-message input,
+.send-message textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ff6600;
+  border-radius: 10px;
+  background-color: #333;
+  color: #fff;
+  outline: none;
+  margin: 0 auto; /* Center the input fields */
+}
+
+.send-message textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+.send-message .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ff6600;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.send-message .btn:hover {
+  background-color: #ff944d;
+  transform: scale(1.05);
+}
+
+/* Floating LinkedIn Button */
+.linkedin-button {
+  position: fixed;
+  bottom: 20px; /* Position at the bottom */
+  right: 20px; /* Position at the right */
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
+.linkedin-button img {
+  width: 50px; /* Adjust size as needed */
+  height: 50px;
+  border-radius: 50%; /* Make it round */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.linkedin-button img:hover {
+  transform: scale(1.1); /* Slightly enlarge on hover */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Enhance shadow on hover */
+}
